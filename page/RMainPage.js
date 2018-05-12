@@ -3,7 +3,7 @@ import {View,UIManager,
     Text,StyleSheet,
     TouchableOpacity,ScrollView} from 'react-native';
 
-import ExpandableView from '../components/ui/ExpandableView';
+import RExpandableView from '../components/ui/RExpandableView';
 
 export default class RMainPage extends Component{
 
@@ -11,8 +11,48 @@ export default class RMainPage extends Component{
         super(props)
         this.state = {
             name : 'Taufik Arifuddin',
-            saldo : 100000
+            saldo : 100000,
+            categories : []
         };
+    }
+
+    componentDidMount = () => {        
+        this.setState({
+            categories : [
+                {
+                    id : 1,
+                    categoryName : 'Category 1',
+                    items : [
+                        {
+                            id : 1,
+                            name : 'Makanan 1',
+                            price : '10'
+                        },
+                        {
+                            id : 2,
+                            name : 'Makanan 2',
+                            price : '10'
+                        },                        
+                    ]
+                },
+                {
+                    id : 2,
+                    categoryName : 'Category 2',
+                    items : [
+                        {
+                            id : 3,
+                            name : 'Makanan 3',
+                            price : '10'
+                        },
+                        {
+                            id : 4,
+                            name : 'Makanan 4',
+                            price : '10'
+                        },                        
+                    ]
+                }
+            ]
+        });
     }
 
     render(){
@@ -29,10 +69,12 @@ export default class RMainPage extends Component{
                     </View>            
                     <View style={styles.content} flex={5}>
                         <Text style={styles.contentTitle}> Choose menu do you want </Text>
-                        <ExpandableView topborder />
-                        <ExpandableView />
-                        <ExpandableView />                        
-                        <ExpandableView />                                                
+                        {
+                            this.state.categories.map(function(data,index){
+                                return <RExpandableView key={data.id.toString()} topborder={ index == 0 ? true : false } 
+                                    categoryName={data.categoryName} items={data.items} />      
+                            })
+                        }
                     </View>
                 </ScrollView>
             </View>            

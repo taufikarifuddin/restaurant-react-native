@@ -2,14 +2,16 @@ import React,{Component} from 'react';
 import {View,Text,TouchableOpacity,
     StyleSheet,UIManager,LayoutAnimation} from 'react-native';
 
+import RExpandableItem from './RExpandableItem';
+
 export default class ExpandableView extends Component{
 
     constructor(props){
         super(props);
         this.state = {
             expand : true,
-            height : 1,
-            layoutHeight : 1
+            height : 0,
+            layoutHeight : 0
         }
 
         this.setLayoutHeight = this.setLayoutHeight.bind(this);
@@ -20,8 +22,7 @@ export default class ExpandableView extends Component{
 
     componentDidMount(){
         this.setState({
-            expand : false,
-            height : 0.1
+            height : 'auto'
         });
     }
 
@@ -45,7 +46,12 @@ export default class ExpandableView extends Component{
 
     render(){
         return(
-            <View style={{width:'100%'}}>
+            <View style={{width:'100%',padding:2,backgroundColor:'#B5B076',
+                borderTopLeftRadius : this.props.topborder ? 10 : 0,
+                borderTopRightRadius : this.props.topborder ? 10 : 0,       
+                borderBottomLeftRadius : this.props.bottomborder ? 10 : 0,
+                borderBottomRightRadius : this.props.bottomborder ? 10 : 0                        
+            }}>
                 <TouchableOpacity 
                     activeOpacity={0.8} 
                     onPress = {this.toggleExpand}
@@ -57,7 +63,7 @@ export default class ExpandableView extends Component{
                         borderBottomRightRadius : this.props.bottomborder ? 10 : 0                        
                     }]}>
 
-                    <Text style={styles.touchableOpacityText}>Testing</Text>                            
+                    <Text style={styles.touchableOpacityText}>{ this.props.categoryName }</Text>                            
 
                 </TouchableOpacity>
                 <View style={{backgroundColor:'white',
@@ -65,7 +71,11 @@ export default class ExpandableView extends Component{
                         overflow:'hidden',
                         height:this.state.height}}>                    
                         <View style={{ padding : 10 }} onLayout = { (val) => this.setLayoutHeight(val.nativeEvent.layout.height) }>
-                            <Text>testing lagi gan</Text>                     
+                            {
+                                this.props.items.map(function(data,index){
+                                    return <RExpandableItem key={data.id} detail={data} />;
+                                })
+                            }
                         </View>
                 </View>
             </View>
