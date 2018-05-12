@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet,  View } from 'react-native';
-import RLoginForm from './components/form/RLoginForm';
+import RMainPage from './page/RMainPage';
 
 export default class App extends React.Component {
   render() {
-    return (      
-      <RLoginForm />
+    return (    
+        <RMainPage />
     );
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text,View,TextInput as TI,StyleSheet } from 'react-native';
-
-export default class TextInput extends React.Component{
+import { Text,View,TextInput,StyleSheet } from 'react-native';
+ 
+export default class RTextInput extends React.Component{
 
     constructor(props){
         super(props);
@@ -13,7 +13,7 @@ export default class TextInput extends React.Component{
                 <Text style={style.label}>
                     {this.props.label}
                 </Text>
-                    <TI style={style.textInput} 
+                    <TextInput style={style.textInput} 
                         secureTextEntry={this.props.password} 
                         underlineColorAndroid='transparent'
                         />                
