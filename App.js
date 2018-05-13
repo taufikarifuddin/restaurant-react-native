@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet,  View } from 'react-native';
-import RMainPage from './page/RMainPage';
+import Routing from './page/Routing'; 
 
 export default class App extends React.Component {
   render() {
     return (    
-        <RMainPage />
+        <Routing />
     );
   }
 }

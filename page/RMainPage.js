@@ -70,7 +70,8 @@ export default class RMainPage extends Component{
     }
 
     _onClick = function(){
-        ToastAndroid.show("clicked",ToastAndroid.LONG);
+//        ToastAndroid.show("clicked",ToastAndroid.LONG);
+        this.props.navigation.navigate('DetailOrder'); 
     }
 
     render(){

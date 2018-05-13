@@ -9,7 +9,8 @@ export default class RExpandableItem extends Component{
         this.state = {
             qty : 0,
             price : 0,
-            orderItem : new ItemOrder()
+            orderItem : new ItemOrder(),
+            itemPrice : this.props.detail.price
         }        
 
         this._onIncr = this._onIncr.bind(this);
@@ -18,18 +19,18 @@ export default class RExpandableItem extends Component{
 
     _onDcrm = () => {
         this.setState({
-            qty : this.state.qty <= 0 ?  0 : this.state.qty - 1,
             price : this.state.qty <= 0 ? 0 : 
-                (this.state.qty - 1) * this.props.detail.price            
+                (this.state.qty - 1) * this.state.itemPrice,            
+            qty : this.state.qty <= 0 ?  0 : this.state.qty - 1
         },function(){
-            this.onUpdate();
+            this.onUpdate(); 
         });
     }
 
     _onIncr = () => {
         this.setState({
-            qty : this.state.qty + 1,
-            price : (this.state.qty + 1) * this.props.detail.price
+            price : (this.state.qty + 1) * this.state.itemPrice,
+            qty : this.state.qty + 1
         },function(){
             this.onUpdate();
         });
