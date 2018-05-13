@@ -20,11 +20,7 @@ export default class RCheckout extends Component{
 
         UIManager.setLayoutAnimationEnabledExperimental(true);
     }
-
-    componentDidMount(){
-        console.log('called');
-    }
-
+    
     _onClick = () => {
 
     }

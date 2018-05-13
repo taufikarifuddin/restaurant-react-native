@@ -17,9 +17,21 @@ export default class RDetailOrder extends Component{
         }
     }
 
+    componentWillMount(){
+        let price = 0;
+        this.state.orders.forEach((elem,index) => {
+            if( !isNaN(elem.price) ) 
+                price += elem.price;
+            console.log(elem.price);
+        });
+
+        this.setState({
+            price : price
+        });
+    }
+
     componentDidMount(){
         let price = 0;
-        console.log('CALLED');
         this.state.orders.forEach((elem,index) => {
             price += elem.price;
             console.log(price);

@@ -30,7 +30,7 @@ export default class RMainPage extends Component{
         });
     }
 
-    componentDidMount = () => {        
+    componentWillMount = () => {        
         this.setState({
             categories : [
                 {
