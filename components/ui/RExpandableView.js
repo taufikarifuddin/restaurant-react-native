@@ -11,19 +11,44 @@ export default class ExpandableView extends Component{
         this.state = {
             expand : true,
             height : 0,
-            layoutHeight : 0
+            layoutHeight : 0,
+            bought : []
         }
 
         this.setLayoutHeight = this.setLayoutHeight.bind(this);
         this.toggleExpand = this.toggleExpand.bind(this);
+        this._onUpdate = this._onUpdate.bind(this);
         
         UIManager.setLayoutAnimationEnabledExperimental(true);
     }
 
-    componentDidMount(){
+    componentDidMount(){        
         this.setState({
             height : 'auto'
         });
+    }
+    
+    _onUpdate = (data) => {
+        let indexOfItem = this.props.items.indexOf(data.detail);
+        if( indexOfItem > -1){
+            let bought = this.state.bought;
+            if( typeof bought[indexOfItem] == 'undefined' && data.qty > 0){
+                bought[indexOfItem] = data.detail;
+            }
+
+            if( data.qty > 0 ){
+                bought[indexOfItem]['price'] = data.price;
+                bought[indexOfItem]['qty'] = data.qty;
+            }else{
+                delete bought[indexOfItem];
+            }
+            
+            this.setState({
+                bought : bought                              
+            },function(){
+                this.props.onUpdate(this.state.bought);
+            })
+        }
     }
 
     toggleExpand = () => {
@@ -33,8 +58,6 @@ export default class ExpandableView extends Component{
             height : this.state.expand ? 0 : this.state.layoutHeight,                        
             expand : !this.state.expand
         });
-
-        console.log(this.state);
     }
 
 
@@ -73,8 +96,8 @@ export default class ExpandableView extends Component{
                         <View style={{ padding : 10 }} onLayout = { (val) => this.setLayoutHeight(val.nativeEvent.layout.height) }>
                             {
                                 this.props.items.map(function(data,index){
-                                    return <RExpandableItem key={data.id} detail={data} />;
-                                })
+                                    return <RExpandableItem onUpdateItem={this._onUpdate} key={index} index={index} detail={data} />;
+                                },this)
                             }
                         </View>
                 </View>

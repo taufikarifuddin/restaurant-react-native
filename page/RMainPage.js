@@ -1,9 +1,12 @@
 import React,{Component} from 'react';
 import {View,UIManager,
     Text,StyleSheet,
-    TouchableOpacity,ScrollView} from 'react-native';
+    TouchableOpacity,
+    ToastAndroid,ScrollView} from 'react-native';
 
 import RExpandableView from '../components/ui/RExpandableView';
+
+import FloatingButton from '../components/ui/FloatingButton';
 
 export default class RMainPage extends Component{
 
@@ -12,8 +15,19 @@ export default class RMainPage extends Component{
         this.state = {
             name : 'Taufik Arifuddin',
             saldo : 100000,
-            categories : []
+            categories : [],
+            orders : []
         };
+        this._onClick = this._onClick.bind(this);
+
+    }
+
+    onUpdate = (data,index) =>{
+        let orders = this.state.orders;
+        orders[index] = data;
+        this.setState({
+            orders : orders
+        });
     }
 
     componentDidMount = () => {        
@@ -55,6 +69,10 @@ export default class RMainPage extends Component{
         });
     }
 
+    _onClick = function(){
+        ToastAndroid.show("clicked",ToastAndroid.LONG);
+    }
+
     render(){
         return(        
             <View style={styles.container} flex={1}>
@@ -69,14 +87,15 @@ export default class RMainPage extends Component{
                     </View>            
                     <View style={styles.content} flex={5}>
                         <Text style={styles.contentTitle}> Choose menu do you want </Text>
-                        {
+                        { 
                             this.state.categories.map(function(data,index){
-                                return <RExpandableView key={data.id.toString()} topborder={ index == 0 ? true : false } 
+                                return <RExpandableView key={data.id.toString()} onUpdate={this.onUpdate} topborder={ index == 0 ? true : false } 
                                     categoryName={data.categoryName} items={data.items} />      
-                            })
+                            },this)
                         }
                     </View>
                 </ScrollView>
+                <FloatingButton onClick={this._onClick} />
             </View>            
         );
     }

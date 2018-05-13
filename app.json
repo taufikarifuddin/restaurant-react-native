@@ -1,4 +1,6 @@
 {
+  "name": "resto-app",
+  "displayName": "resto-app",
   "expo": {
     "sdkVersion": "27.0.0"
   }

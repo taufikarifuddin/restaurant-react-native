@@ -1,15 +1,19 @@
 import React,{Component} from 'react';
 import {View,Text,TextInput,Button,StyleSheet,UIManager} from 'react-native';
+import ItemOrder from './../../dto/ItemOrder';
 
 export default class RExpandableItem extends Component{
-
 
     constructor(props){
         super(props);
         this.state = {
             qty : 0,
-            price : 0
+            price : 0,
+            orderItem : new ItemOrder()
         }        
+
+        this._onIncr = this._onIncr.bind(this);
+        this._onDcrm = this._onDcrm.bind(this);      
     }
 
     _onDcrm = () => {
@@ -17,6 +21,8 @@ export default class RExpandableItem extends Component{
             qty : this.state.qty <= 0 ?  0 : this.state.qty - 1,
             price : this.state.qty <= 0 ? 0 : 
                 (this.state.qty - 1) * this.props.detail.price            
+        },function(){
+            this.onUpdate();
         });
     }
 
@@ -24,7 +30,17 @@ export default class RExpandableItem extends Component{
         this.setState({
             qty : this.state.qty + 1,
             price : (this.state.qty + 1) * this.props.detail.price
+        },function(){
+            this.onUpdate();
         });
+    }
+
+    onUpdate = () => {
+        this.props.onUpdateItem({
+            qty : this.state.qty,
+            price : this.state.price,
+            detail : this.props.detail
+        },this.props.index);
     }
 
     _onDetail = () => {
