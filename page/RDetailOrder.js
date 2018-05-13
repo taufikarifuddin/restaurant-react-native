@@ -11,9 +11,23 @@ export default class RDetailOrder extends Component{
     constructor(props){
         super(props);
         this.state = {
-            listOrder : this.props.listOrder ? 
-                this.props.listOrder : []
+            orders : this.props.orders ? 
+                this.props.orders : [],
+            price : 0
         }
+    }
+
+    componentDidMount(){
+        let price = 0;
+        console.log('CALLED');
+        this.state.orders.forEach((elem,index) => {
+            price += elem.price;
+            console.log(price);
+        });
+
+        this.setState({
+            price : price
+        });
     }
 
     renderColumn(index,name,qty,price){
@@ -36,7 +50,7 @@ export default class RDetailOrder extends Component{
                 </View>
                 <View style={styles.rowColumn}>
                     <Text style={[styles.textTable]}>
-                        {price}
+                        Rp. {price}
                     </Text>                    
                 </View>                
             </View>
@@ -69,7 +83,7 @@ export default class RDetailOrder extends Component{
                             this.renderColumn('No','Nama','Jumlah','Harga')
                         }
                         {
-                            this.state.listOrder.map((val,index) => {
+                            this.state.orders.map((val,index) => {
                                 return this.renderColumn(index+1,val.name,val.qty,val.price);
                             })
                         }
@@ -81,7 +95,7 @@ export default class RDetailOrder extends Component{
                             </View>
                             <View style={styles.footerTotal}>
                                 <Text style={[styles.textTable]}>
-                                    Rp. 10000
+                                    Rp. {this.state.price}
                                 </Text>                    
                             </View> 
                         </View>

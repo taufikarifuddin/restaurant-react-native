@@ -46,7 +46,7 @@ export default class ExpandableView extends Component{
             this.setState({
                 bought : bought                              
             },function(){
-                this.props.onUpdate(this.state.bought);
+                this.props.onUpdate(this.state.bought,this.props.index);
             })
         }
     }

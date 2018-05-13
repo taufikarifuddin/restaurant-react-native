@@ -10,19 +10,29 @@ export default class RCheckout extends Component{
     
     constructor(props){
         super(props);
+        const{navigation} = this.props;
+
         this._onClick = this._onClick.bind(this);
+
+        this.state = {
+            orders : navigation.getParam('orders',[])
+        }
 
         UIManager.setLayoutAnimationEnabledExperimental(true);
     }
 
+    componentDidMount(){
+        console.log('called');
+    }
+
     _onClick = () => {
-        
+
     }
 
     render(){
         return(
             <View style={styles.container}>
-                <RDetailOrder />
+                <RDetailOrder orders={this.state.orders} />
                 <FloatingButton onClick={this._onClick} />
             </View>
         );

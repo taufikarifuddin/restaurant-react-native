@@ -69,9 +69,24 @@ export default class RMainPage extends Component{
         });
     }
 
-    _onClick = function(){
-//        ToastAndroid.show("clicked",ToastAndroid.LONG);
-        this.props.navigation.navigate('DetailOrder'); 
+    concatingAllOrderFromCategory = () => {
+        let orders = [];
+        
+        this.state.orders.forEach((elem,index) => {
+            if( orders.length == 0 ){
+                orders = elem;
+            }else{
+                orders = orders.concat(elem);
+            }            
+        })
+
+        return orders;
+    }
+
+    _onClick = () => {
+        let orders = this.concatingAllOrderFromCategory();
+
+        this.props.navigation.navigate('Checkout',{ orders : orders }); 
     }
 
     render(){
@@ -90,7 +105,7 @@ export default class RMainPage extends Component{
                         <Text style={styles.contentTitle}> Choose menu do you want </Text>
                         { 
                             this.state.categories.map(function(data,index){
-                                return <RExpandableView key={data.id.toString()} onUpdate={this.onUpdate} topborder={ index == 0 ? true : false } 
+                                return <RExpandableView key={data.id.toString()} onUpdate={this.onUpdate} index={index} topborder={ index == 0 ? true : false } 
                                     categoryName={data.categoryName} items={data.items} />      
                             },this)
                         }
