@@ -6,11 +6,11 @@ import RDetailOrder from './RDetailOrder';
 import RCheckout from './RCheckout';
 
 export default Routing = createStackNavigator ({    
+    Main : { screen :  RMainPage},        
+    Checkout : {screen : RCheckout},            
     DetailOrder : { screen : RDetailOrder },
     Login : { screen : RLoginForm },
-    Main : { screen :  RMainPage},    
     Register : { screen : RRegisterForm },
-    Checkout : {screen : RCheckout},        
 },{
     headerMode : 'none',
     mode : 'modal'

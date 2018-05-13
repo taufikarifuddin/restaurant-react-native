@@ -14,12 +14,6 @@ export default class RDetailOrder extends Component{
             listOrder : this.props.listOrder ? 
                 this.props.listOrder : []
         }
-
-        this._onClick = this._onClick.bind(this);
-    }
-
-    _onClick = () => {
-
     }
 
     renderColumn(index,name,qty,price){
@@ -42,7 +36,7 @@ export default class RDetailOrder extends Component{
                 </View>
                 <View style={styles.rowColumn}>
                     <Text style={[styles.textTable]}>
-                        {qty}
+                        {price}
                     </Text>                    
                 </View>                
             </View>
@@ -107,7 +101,8 @@ const styles = StyleSheet.create({
     },
     textheader : {
         fontWeight:'bold',
-        color:'white'
+        color:'white',
+        textAlign:'center'
     },
     textHeaderMain : {
         fontSize : 30,
