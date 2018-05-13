@@ -19,7 +19,11 @@ export default class RMainPage extends Component{
             orders : []
         };
         this._onClick = this._onClick.bind(this);
+        this._onPress = this._onPress.bind(this);
+    }
 
+    _onPress = () => {
+        this.props.navigation.navigate('HistoryOrder');
     }
 
     onUpdate = (data,index) =>{
@@ -94,6 +98,16 @@ export default class RMainPage extends Component{
             <View style={styles.container} flex={1}>
                 <ScrollView>
                     <View style={styles.header} flex={1}>
+                        <TouchableOpacity activeOpacity={0.7} 
+                        onPress = {this._onPress}
+                        style={{
+                            position:'absolute',
+                            left: 10
+                        }}>
+                            <Text style={[styles.text,{ fontSize:13 }]}>
+                                Orders
+                            </Text>
+                        </TouchableOpacity>
                         <Text style = {styles.text}>
                             {this.state.name}
                         </Text>
