@@ -1,41 +1,77 @@
 import React,{Component} from 'react';
 import {View,Text,Modal,ToastAndroid,TouchableHighlight,StyleSheet,Button} from 'react-native';
+import {NavigationAction} from 'react-navigation';
+
 import RTextInput from '../components/form/RTextInput';
 import RButton from '../components/form/RButton';
 
 export default class RRegisterForm extends Component{
     constructor(props){
         super(props);
-        this.state = { isVisible : false };
-        this._onPress = this._onPress.bind(this);    
+        this.state = { 
+            registerForm : {
+                username : null,
+                email : null,
+                password : null,
+                rePassword : null
+            }
+        };
+        this._onPress = this._onPress.bind(this);   
+        this._backToLogin = this._backToLogin.bind(this); 
+        this.onChange = this.onChange.bind(this);
     }
 
     _onPress = function(){
-        ToastAndroid.show('Clicked',ToastAndroid.SHORT);
+        console.log(this.state.registerForm);
+        this._backToLogin();
+    }
+
+    _backToLogin = function(){
+        this.props.navigation.goBack();
+    }
+
+    onChange = (value,name) =>{
+        let registerForm = this.state.registerForm;
+        registerForm[name] = value;
+        this.setState({
+            registerForm : registerForm
+        });
     }
 
     render(){
         return(
             <View style={styles.container}>
                 <View style={styles.loginContainer}>
+                    <View onTouchStart={this._backToLogin} style={{ position:'absolute',top:20,left:20 }}>
+                        <Text style={{ fontWeight:'bold' }}>Back</Text>
+                    </View>
                     <View style={{alignItems:'center',marginBottom:50}}>
-                        <Text style={[styles.textLoginheader,styles.textLoginHeaderMain]}>
+                        <Text style={[styles.textRegisterheader,styles.textRegisterheaderMain]}>
                             Registration Page
                         </Text>
-                        <Text style={[styles.textLoginheader,styles.textLoginHeaderSubMain]}>
+                        <Text style={[styles.textRegisterheader,styles.textRegisterheaderSubMain]}>
                             Introduce yourself with fill your identity
                         </Text>
                     </View>
                     <View>
                         <RTextInput 
+                            onChange = {this.onChange}
+                            name="username"
                             label="Username"  />
                         <RTextInput 
+                            onChange = {this.onChange}                        
+                            name="email"
                             label="Email"  />                            
                         <RTextInput 
+                            onChange = {this.onChange}                        
+                            name="password"
                             label="Password" 
                             password={true}/>
                         <RTextInput 
-                            label="Retype Password"  />                            
+                            onChange = {this.onChange}                        
+                            name="rePassword"
+                            label="Retype Password"
+                            password={true}  />                            
                         <RButton onClick={this._onPress} text="Register" />
                     </View>
                 </View>
@@ -60,27 +96,14 @@ const styles = StyleSheet.create({
       paddingLeft:10,
       paddingRight:10
     },
-    loginBtn : {
-        padding:5,
-        backgroundColor:'#FF9106',
-        padding:15,
-        borderRadius:25,
-        marginTop:10,
-        alignItems:'center'
-    },
-    loginBtnText : {
-        color:'white',
-        fontWeight:'bold',
-        alignContent:'center',        
-    },
-    textLoginheader : {
+    textRegisterheader : {
         fontWeight:'bold'
     },
-    textLoginHeaderMain : {
+    textRegisterheaderMain : {
         fontSize : 30,
         alignItems:'center'
     },
-    textLoginHeaderSubMain:{
+    textRegisterheaderSubMain:{
         fontSize : 15
     }
   });

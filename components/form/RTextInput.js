@@ -5,6 +5,11 @@ export default class RTextInput extends React.Component{
 
     constructor(props){
         super(props);
+        this._onChange = this._onChange.bind(this);
+    }
+
+    _onChange = (text) =>{
+        this.props.onChange(text,this.props.name);
     }
 
     render(){
@@ -13,7 +18,9 @@ export default class RTextInput extends React.Component{
                 <Text style={style.label}>
                     {this.props.label}
                 </Text>
-                    <TextInput style={style.textInput} 
+                    <TextInput 
+                        onChangeText  = {this._onChange}
+                        style={style.textInput} 
                         secureTextEntry={this.props.password} 
                         underlineColorAndroid='transparent'
                         />                

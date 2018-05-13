@@ -7,12 +7,42 @@ export default class LoginForm extends Component{
 
     constructor(props){
         super(props);
-        this.state = { isVisible : false };
+        this.state = { 
+            isVisible : false,
+            loginForm : {
+                username : null,
+                password : null
+            }
+        };
+
         this._onPress = this._onPress.bind(this);    
+        this._onSignUp = this._onSignUp.bind(this);            
+        this.onChange = this.onChange.bind(this);
     }
 
     _onPress = function(){
-        ToastAndroid.show('Clicked',ToastAndroid.SHORT);
+        let loginForm = this.state.loginForm;
+        if( loginForm.username == 'admin' 
+                && loginForm.password == 'admin' ){
+            this.props.navigation.navigate('Main');
+        }else{
+            ToastAndroid.show('Invalid Username / Password',ToastAndroid.SHORT);
+        }
+    }
+
+    _onSignUp = function(){
+        this.props.navigation.navigate('Register');
+    }
+
+    onChange(value,name){
+
+        let loginForm = this.state.loginForm;
+        
+        loginForm[name] = value;
+
+        this.setState({
+            loginForm : loginForm
+        });
     }
 
     render(){
@@ -29,11 +59,11 @@ export default class LoginForm extends Component{
                     </View>
                     <View>
                         <RTextInput 
-                            label="Username"  />
-                        <RTextInput 
-                            label="Password" 
-                            password={true}/>
-                        <RButton onClick={this._onPress} text="Login" />
+                            label="Username" name="username" onChange={this.onChange}  />
+                        <RTextInput
+                            label="Password"  name="password" password={true} onChange={this.onChange}/>
+                        <RButton onClick={this._onPress} text="Sign In" />
+                        <RButton onClick={this._onSignUp} text="Register" />                        
                     </View>
                 </View>
             </View>    
