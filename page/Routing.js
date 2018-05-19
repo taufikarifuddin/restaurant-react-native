@@ -7,9 +7,9 @@ import RCheckout from './RCheckout';
 import RHistoryOrder from './RHistoryOrder';
 
 export default Routing = createStackNavigator ({    
-    HistoryOrder : { screen : RHistoryOrder },    
-    Main : { screen :  RMainPage},    
-    Login : { screen : RLoginForm },        
+    Login : { screen : RLoginForm },                
+    HistoryOrder : { screen : RHistoryOrder },        
+    Main : { screen :  RMainPage},        
     Checkout : {screen : RCheckout},            
     DetailOrder : { screen : RDetailOrder },
     Register : { screen : RRegisterForm },

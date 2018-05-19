@@ -5,8 +5,8 @@ import {View,UIManager,
     ToastAndroid,ScrollView} from 'react-native';
 
 import RExpandableView from '../components/ui/RExpandableView';
-
 import FloatingButton from '../components/ui/FloatingButton';
+import { CHECKOUT_PAGE,HISTORY_ORDER_PAGE } from './../components/stylesheet/constant';
 
 export default class RMainPage extends Component{
 
@@ -23,7 +23,7 @@ export default class RMainPage extends Component{
     }
 
     _onPress = () => {
-        this.props.navigation.navigate('HistoryOrder');
+        this.props.navigation.navigate(HISTORY_ORDER_PAGE);
     }
 
     onUpdate = (data,index) =>{
@@ -90,7 +90,7 @@ export default class RMainPage extends Component{
     _onClick = () => {
         let orders = this.concatingAllOrderFromCategory();
 
-        this.props.navigation.navigate('Checkout',{ orders : orders }); 
+        this.props.navigation.navigate(CHECKOUT_PAGE,{ orders : orders }); 
     }
 
     render(){

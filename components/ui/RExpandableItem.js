@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
-import {View,Text,TextInput,Button,StyleSheet,UIManager} from 'react-native';
+import {View,Text,TextInput,Button,
+    StyleSheet,UIManager,TouchableOpacity} from 'react-native';
 import ItemOrder from './../../dto/ItemOrder';
 
 export default class RExpandableItem extends Component{
@@ -51,19 +52,26 @@ export default class RExpandableItem extends Component{
     render(){
         return(
             <View padding={15} flexDirection="row" justifyContent="space-between">
-                    <Text> 
+                    <Text style={styles.elem}> 
                         { this.props.detail.name }
-                    </Text>                                      
-                    <Button onPress={this._onDetail} title="Detail" />                                                                 
-                    <Text>
+                    </Text>                                                                                                                          
+                    <Text style={styles.elem}>
                         Rp. { this.state.price }
                     </Text>                                   
-                    <View  flexDirection="row"> 
-                        <Button onPress={this._onDcrm} style={styles.qtyBtn} title = "<" />
+                    <View  flexDirection="row" style={styles.elem}> 
+                        <TouchableOpacity activeOpacity={0.9} onPress={this._onDcrm} style={styles.qtyBtn}>
+                            <Text style={styles.btnTxt}>
+                                {"<"}
+                            </Text>
+                        </TouchableOpacity >
                         <TextInput editable={false} value={this.state.qty.toString()} style={{
-                            paddingLeft:19
+                            textAlign:'center'
                         }} defaultValue="0" /> 
-                        <Button onPress={this._onIncr} style={styles.qtyBtn}  title = ">" />                    
+                        <TouchableOpacity onPress={this._onIncr} style={styles.qtyBtn} >
+                            <Text style={styles.btnTxt}>
+                                {">"}
+                            </Text>
+                        </TouchableOpacity>                    
                     </View>                                 
             </View>
         );
@@ -72,7 +80,19 @@ export default class RExpandableItem extends Component{
 }
 
 const styles = StyleSheet.create({
+    elem : {
+        alignSelf : 'stretch'
+    },
     qtyBtn : {
-        fontWeight:'bold'
-    } 
+    },
+    btnTxt : {
+        padding:10,
+        backgroundColor:'blue',        
+        fontWeight : 'bold',
+        color:'white',
+        backgroundColor:'#5BC0DE'
+    },
+    btn : {
+        height:1
+    }
 });

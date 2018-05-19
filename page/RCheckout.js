@@ -3,7 +3,7 @@ import {View,StyleSheet,
     Animation,UIManager} from 'react-native';
 
 import RDetailOrder from "./RDetailOrder";
-import {BACKGROUND_COLOR} from './../components/stylesheet/constant';
+import {BACKGROUND_COLOR,HISTORY_ORDER_PAGE, MAIN_PAGE} from './../components/stylesheet/constant';
 import FloatingButton from './../components/ui/FloatingButton';
 
 export default class RCheckout extends Component{
@@ -22,7 +22,7 @@ export default class RCheckout extends Component{
     }
     
     _onClick = () => {
-
+        this.props.navigation.goBack();
     }
 
     render(){

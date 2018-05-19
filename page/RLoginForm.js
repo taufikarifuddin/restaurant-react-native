@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {View,Text,Modal,ToastAndroid,TouchableHighlight,StyleSheet,Button} from 'react-native';
 import RTextInput from '../components/form/RTextInput';
 import RButton from '../components/form/RButton';
+import { MAIN_PAGE } from './../components/stylesheet/constant';
 
 export default class LoginForm extends Component{
 
@@ -24,7 +25,7 @@ export default class LoginForm extends Component{
         let loginForm = this.state.loginForm;
         if( loginForm.username == 'admin' 
                 && loginForm.password == 'admin' ){
-            this.props.navigation.navigate('Main');
+            this.props.navigation.navigate(MAIN_PAGE);
         }else{
             ToastAndroid.show('Invalid Username / Password',ToastAndroid.SHORT);
         }
