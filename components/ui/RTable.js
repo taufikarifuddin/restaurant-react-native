@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     },
     textTable : {
         fontWeight:'bold',
-        fontSize:20,
+        fontSize:12,
     },
     headerTable : {
         height:10

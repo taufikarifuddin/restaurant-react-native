@@ -50,7 +50,7 @@ export default class LoginForm extends Component{
         return(
             <View style={styles.container}>
                 <View style={styles.loginContainer}>
-                    <View style={{alignItems:'center',marginBottom:50}}>
+                    <View style={{alignItems:'center',marginBottom:10}}>
                         <Text style={[styles.textLoginheader,styles.textLoginHeaderMain]}>
                             Member Login
                         </Text>
@@ -83,11 +83,12 @@ const styles = StyleSheet.create({
     loginContainer:{
       backgroundColor:'#FFF',
       width:'80%',
-      height:'60%',
       borderRadius:10,
       justifyContent: 'center',
       paddingLeft:10,
-      paddingRight:10
+      paddingRight:10,
+      paddingBottom:30,
+      paddingTop:30
     },
     loginBtn : {
         padding:5,

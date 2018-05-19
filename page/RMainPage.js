@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#EBCB64',
     },
     header : {
-        marginTop:50,
+        marginTop:10,
         alignItems: 'center',        
     },    
     text : {
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     },
     content: {
         padding:10,
-        marginTop:50,
+        marginTop:10,
         alignItems:'center'
     },
     contentTitle : {

@@ -42,10 +42,7 @@ export default class RRegisterForm extends Component{
         return(
             <View style={styles.container}>
                 <View style={styles.loginContainer}>
-                    <View onTouchStart={this._backToLogin} style={{ position:'absolute',top:20,left:20 }}>
-                        <Text style={{ fontWeight:'bold' }}>Back</Text>
-                    </View>
-                    <View style={{alignItems:'center',marginBottom:50}}>
+                    <View style={{alignItems:'center',marginBottom:10}}>
                         <Text style={[styles.textRegisterheader,styles.textRegisterheaderMain]}>
                             Registration Page
                         </Text>
@@ -73,6 +70,7 @@ export default class RRegisterForm extends Component{
                             label="Retype Password"
                             password={true}  />                            
                         <RButton onClick={this._onPress} text="Register" />
+                        <RButton onClick={this._backToLogin} text="Cancel" />
                     </View>
                 </View>
             </View>    
@@ -90,11 +88,12 @@ const styles = StyleSheet.create({
     loginContainer:{
       backgroundColor:'#FFF',
       width:'80%',
-      height:'80%',
       borderRadius:10,
       justifyContent: 'center',
       paddingLeft:10,
-      paddingRight:10
+      paddingRight:10,
+      paddingTop:10,
+      paddingBottom:20
     },
     textRegisterheader : {
         fontWeight:'bold'

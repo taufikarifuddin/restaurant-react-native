@@ -86,14 +86,14 @@ export default class RDetailOrder extends Component{
     render(){
         return(
             <View style={styles.container}>
+                <Text style={[styles.textheader,styles.textHeaderMain]}>
+                    Detail Order
+                </Text>            
+                {
+                    this.renderColumn('No','Nama','Jumlah','Harga')
+                }
                 <ScrollView>
-                    <Text style={[styles.textheader,styles.textHeaderMain]}>
-                        Detail Order
-                    </Text>
-                    <View styles={styles.table}>
-                        {
-                            this.renderColumn('No','Nama','Jumlah','Harga')
-                        }
+                    <View styles={styles.table}>                        
                         {
                             this.state.orders.map((val,index) => {
                                 return this.renderColumn(index+1,val.name,val.qty,val.price);
@@ -140,7 +140,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     rowTable : {
-        flex:1,
         alignSelf:'stretch',
         flexDirection:'row',
     },
@@ -152,7 +151,7 @@ const styles = StyleSheet.create({
     },
     textTable : {
         fontWeight:'bold',
-        fontSize:20
+        fontSize:12
     },
     footerColumn :{
         alignItems:'center',

@@ -67,7 +67,7 @@ export default class RExpandableItem extends Component{
                         <TextInput editable={false} value={this.state.qty.toString()} style={{
                             textAlign:'center'
                         }} defaultValue="0" /> 
-                        <TouchableOpacity onPress={this._onIncr} style={styles.qtyBtn} >
+                        <TouchableOpacity activeOpacity={0.9} onPress={this._onIncr} style={styles.qtyBtn} >
                             <Text style={styles.btnTxt}>
                                 {">"}
                             </Text>
